@@ -35,7 +35,7 @@ SWEP.HeadshotMultiplier = 3
 SWEP.IronSightsPos = Vector( 6.05, -5, 2.4 )
 SWEP.IronSightsAng = Vector( 2.2, -0.1, 0 )
 
-SWEP.ViewModel  = "models/weapons/v_snip_scar20.vtf"
+SWEP.ViewModel  = "models/weapons/v_snip_scar20.mdl"
 SWEP.WorldModel = "models/weapons/w_snip_scar20.mdl"
 
 function SWEP:SetZoom(state)
@@ -55,7 +55,11 @@ function SWEP:SecondaryAttack()
     if self.Weapon:GetNextSecondaryFire() > CurTime() then return end
     
     bIronsights = not self:GetIronsights()
+
+	inverseIronsights = self:GetIronsights()
     
+	self.Owner:DrawViewModel( inverseIronsights )
+
     self:SetIronsights( bIronsights )
     
     if SERVER then
@@ -67,15 +71,24 @@ function SWEP:SecondaryAttack()
     self.Weapon:SetNextSecondaryFire( CurTime() + 0.3)
 end
 
+
 function SWEP:Reload()
     self.Weapon:DefaultReload( ACT_VM_RELOAD );
     self:SetIronsights( false )
+	self.Owner:DrawViewModel(true)
     self:SetZoom(false)
 end
 
+function SWEP:PreDrop()
+	self.Owner:DrawViewModel(true)
+    self:SetZoom(false)
+    self:SetIronsights(false)
+    return self.BaseClass.PreDrop(self)
+end
 
 function SWEP:Holster()
     self:SetIronsights(false)
+	self.Owner:DrawViewModel(true)
     self:SetZoom(false)
     return true
 end
@@ -170,7 +183,7 @@ SWEP.NoSights = false
 -- Equipment menu information is only needed on the client
 if CLIENT then
    -- Path to the icon material
-   SWEP.Icon = "VGUI/ttt/snip_scar20.vtf"
+   SWEP.Icon = "VGUI/ttt/scar-20.vmt"
 
    -- Text shown in the equip menu
    SWEP.EquipMenuData = {
@@ -185,6 +198,6 @@ if SERVER then
    -- file differences, it only looks at the name. This means that if you have
    -- an icon_ak47, and another server also has one, then players might see the
    -- other server's dumb icon. Avoid this by using a unique name.
-   resource.AddFile("materials/VGUI/ttt/snip_emp_scar20.vtf")
+   resource.AddFile("materials/VGUI/ttt/scar-20.vmt")
 end
 
