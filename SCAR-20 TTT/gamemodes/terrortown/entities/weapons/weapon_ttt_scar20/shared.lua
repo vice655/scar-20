@@ -162,7 +162,7 @@ SWEP.AmmoEnt = "item_ammo_357_ttt"
 
 -- CanBuy is a table of ROLE_* entries like ROLE_TRAITOR and ROLE_DETECTIVE. If
 -- a role is in this table, those players can buy this.
-SWEP.CanBuy = { ROLE_DETECTIVE }
+SWEP.CanBuy = { ROLE_DETECTIVE, ROLE_TRAITOR }
 
 -- InLoadoutFor is a table of ROLE_* entries that specifies which roles should
 -- receive this weapon as soon as the round starts. In this case, none.
