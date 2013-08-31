@@ -21,16 +21,16 @@ SWEP.Base				= "weapon_tttbase"
 SWEP.HoldType			= "ar2"
 
 SWEP.Primary.Delay       = 0.20996
-SWEP.Primary.Recoil      = 1.537
+SWEP.Primary.Recoil      = 1.587
 SWEP.Primary.Automatic   = false
-SWEP.Primary.Damage      = 34
+SWEP.Primary.Damage      = 31
 SWEP.Primary.Cone        = 0.003
 SWEP.Primary.Ammo        = "357"
 SWEP.Primary.ClipSize    = 20
 SWEP.Primary.ClipMax     = 40
 SWEP.Primary.DefaultClip = 40
 SWEP.Primary.Sound       = Sound( "scar20_unsil-1.wav" )
-SWEP.HeadshotMultiplier = 3
+SWEP.HeadshotMultiplier = 4
 
 SWEP.IronSightsPos = Vector( 6.05, -5, 2.4 )
 SWEP.IronSightsAng = Vector( 2.2, -0.1, 0 )
@@ -188,7 +188,7 @@ if CLIENT then
    -- Text shown in the equip menu
    SWEP.EquipMenuData = {
       type = "Weapon",
-      desc = "A semi automatic sniper rifle"
+      desc = "This is a prerelease version."
    };
 end
 
