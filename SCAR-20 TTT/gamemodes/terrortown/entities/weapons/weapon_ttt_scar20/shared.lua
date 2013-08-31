@@ -188,7 +188,7 @@ if CLIENT then
    -- Text shown in the equip menu
    SWEP.EquipMenuData = {
       type = "Weapon",
-      desc = "This is a prerelease version."
+      desc = "A semi automatic sniper rifle"
    };
 end
 
