@@ -35,7 +35,7 @@ SWEP.HeadshotMultiplier = 3
 SWEP.IronSightsPos = Vector( 6.05, -5, 2.4 )
 SWEP.IronSightsAng = Vector( 2.2, -0.1, 0 )
 
-SWEP.ViewModel  = "models/weapons/v_snip_g3sg1.mdl"
+SWEP.ViewModel  = "models/weapons/v_snip_scar20.vtf"
 SWEP.WorldModel = "models/weapons/w_snip_scar20.mdl"
 
 function SWEP:SetZoom(state)
