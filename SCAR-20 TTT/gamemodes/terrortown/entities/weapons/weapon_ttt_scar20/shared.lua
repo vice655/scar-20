@@ -30,7 +30,9 @@ SWEP.Primary.ClipSize    = 20
 SWEP.Primary.ClipMax     = 40
 SWEP.Primary.DefaultClip = 40
 SWEP.Primary.Sound       = Sound( "scar20_unsil-1.wav" )
-SWEP.HeadshotMultiplier = 4
+SWEP.HeadshotMultiplier  = 4
+
+SWEP.Secondary.Soun	 = Sound("Default.Zoom")
 
 SWEP.IronSightsPos = Vector( 6.05, -5, 2.4 )
 SWEP.IronSightsAng = Vector( 2.2, -0.1, 0 )
