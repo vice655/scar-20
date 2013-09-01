@@ -5,7 +5,10 @@ In beta
 
 Tested 31/08/13
 
-No bugs found.
+Bugs;
+*FIXED - When using scope, the game would crash **
+*FIXED - Viewmodel, sound, worldmodel doesnt function*
+
 
 To install, move the CONTENTS of SCAR-20 TTT into gmod directory 
 That is;
