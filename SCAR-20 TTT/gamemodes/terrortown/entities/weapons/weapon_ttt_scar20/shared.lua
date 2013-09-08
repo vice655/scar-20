@@ -24,7 +24,8 @@ SWEP.Primary.Delay       = 0.20996
 SWEP.Primary.Recoil      = 1.587
 SWEP.Primary.Automatic   = false
 SWEP.Primary.Damage      = 31
-SWEP.Primary.Cone        = 0.003
+SWEP.Primary.Cone        = 0.1
+SWEP.Secondary.Cone        = 0.003
 SWEP.Primary.Ammo        = "357"
 SWEP.Primary.ClipSize    = 20
 SWEP.Primary.ClipMax     = 40
@@ -37,8 +38,8 @@ SWEP.Secondary.Sound	 = Sound("Default.Zoom")
 SWEP.IronSightsPos = Vector( 6.05, -5, 2.4 )
 SWEP.IronSightsAng = Vector( 2.2, -0.1, 0 )
 
-SWEP.ViewModel  = "models/weapons/v_snip_scar20.mdl"
-SWEP.WorldModel = "models/weapons/w_snip_scar20.mdl"
+SWEP.ViewModel  = Model("models/weapons/v_snip_scar20.mdl")
+SWEP.WorldModel = Model("models/weapons/w_snip_scar20.mdl")
 
 function SWEP:SetZoom(state)
     if CLIENT then 
@@ -73,24 +74,21 @@ function SWEP:SecondaryAttack()
     self.Weapon:SetNextSecondaryFire( CurTime() + 0.3)
 end
 
-
-function SWEP:Reload()
-    self.Weapon:DefaultReload( ACT_VM_RELOAD );
-    self:SetIronsights( false )
-	self.Owner:DrawViewModel(true)
-    self:SetZoom(false)
-end
-
 function SWEP:PreDrop()
-	self.Owner:DrawViewModel(true)
     self:SetZoom(false)
     self:SetIronsights(false)
     return self.BaseClass.PreDrop(self)
 end
 
+function SWEP:Reload()
+    self.Weapon:DefaultReload( ACT_VM_RELOAD );
+    self:SetIronsights( false )
+    self:SetZoom(false)
+end
+
+
 function SWEP:Holster()
     self:SetIronsights(false)
-	self.Owner:DrawViewModel(true)
     self:SetZoom(false)
     return true
 end
@@ -144,6 +142,49 @@ if CLIENT then
    function SWEP:AdjustMouseSensitivity()
       return (self:GetIronsights() and 0.2) or nil
    end
+	SWEP.Offset = {
+		Pos = {
+			Up = 0,
+			Right = 1,
+			Forward = -3,
+		},
+		Ang = {
+			Up = 0,
+			Right = 0,
+			Forward = 0,
+		}
+	}
+	--[[
+	function SWEP:DrawWorldModel( )
+		local hand, offset, rotate
+
+		if not IsValid( self.Owner ) then
+			self:DrawModel( )
+			return
+		end
+
+		if not self.Hand then
+			self.Hand = self.Owner:LookupAttachment( "anim_attachment_rh" )
+		end
+
+		hand = self.Owner:GetAttachment( self.Hand )
+
+		if not hand then
+			self:DrawModel( )
+			return
+		end
+
+		offset = hand.Ang:Right( ) * self.Offset.Pos.Right + hand.Ang:Forward( ) * self.Offset.Pos.Forward + hand.Ang:Up( ) * self.Offset.Pos.Up
+
+		hand.Ang:RotateAroundAxis( hand.Ang:Right( ), self.Offset.Ang.Right )
+		hand.Ang:RotateAroundAxis( hand.Ang:Forward( ), self.Offset.Ang.Forward )
+		hand.Ang:RotateAroundAxis( hand.Ang:Up( ), self.Offset.Ang.Up )
+
+		self:SetRenderOrigin( hand.Pos + offset )
+		self:SetRenderAngles( hand.Ang )
+
+		self:DrawModel( )
+	end--]]
 end
 
 
